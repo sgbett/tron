@@ -1,0 +1,9 @@
+<h4>Automatically Submit to Portfolio Online</h4>
+<div>
+<%= form_for :tron_module, url: [request.url,'tron_modules'].join do |f|%>
+  
+<br /><div>Reflective Notes (optional)<br /><%= f.text_area :notes, cols:40, rows:10 %></div>
+<br /><div><%= f.submit %></div>
+
+<% end %>
+</div>
