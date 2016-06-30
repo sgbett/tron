@@ -16,13 +16,13 @@ class TronModulesController < ApplicationController
         response = resource.post(client_id: CLIENT_ID, client_secret: CLIENT_SECRET, code: code , grant_type: 'authorization_code', redirect_uri: request.url.split('?')[0])
 
         access_token = JSON.parse(response)['access_token']
-        
+                
         data = {"form"=>{"tool"=>"tron_module","responses"=>{"module_name"=>"Pharmacodynamics=> Part 1","module_url"=>"http=>//tron.rcpsych.ac.uk/default.aspx?page=22559","reflection"=>session[:notes]},"evidence_attributes"=>{"start_date"=>Date.today}}}
 
         resource = RestClient::Resource.new("#{HOST}/api/forms.js",verify_ssl: false, headers: { Authorization: "Bearer #{access_token}"})
         response = resource.post data.to_json, content_type: :json, accept: :json
 
-        redirect_to JSON.parse(response)['activity_url']
+        @url = JSON.parse(response)['activity_url']
 
       else
         render text: params.inspect
