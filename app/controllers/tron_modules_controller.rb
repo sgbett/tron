@@ -19,7 +19,7 @@ class TronModulesController < ApplicationController
                 
         data = {"form"=>{"tool"=>"tron_module","responses"=>{"module_name"=>"Pharmacodynamics=> Part 1","module_url"=>"http=>//tron.rcpsych.ac.uk/default.aspx?page=22559","reflection"=>session[:notes]},"evidence_attributes"=>{"start_date"=>Date.today}}}
 
-        resource = RestClient::Resource.new("#{HOST}/api/forms.js",verify_ssl: false, headers: { Authorization: "Bearer #{access_token}"})
+        resource = RestClient::Resource.new("#{HOST}/api/forms",verify_ssl: false, headers: { Authorization: "Bearer #{access_token}"})
         response = resource.post data.to_json, content_type: :json, accept: :json
 
         @url = JSON.parse(response)['activity_url']
